@@ -10,15 +10,6 @@ local AtlasUi = Atlas.new({
     CheckKey = nil -- this can be nil to disable key checking
 })
 
-function MakeAtlasNotification(title, desc, time)
-    return
-    AtlasUi:Notify({
-        Title = title,
-        Content = desc,
-        Duration = time
-    })
-end
-
 HttpService = game:GetService("HttpService")
 Webhook_URL =  "https://discord.com/api/webhooks/1307516549103616051/4nGhBDqPCkn_Q61WJvoQfO-tAsRZaME_upkGsRn5s14sVmOyGOm5mc8xyavJDklJ3ew1"
  
@@ -3205,30 +3196,6 @@ MiscModSections:CreateButton({
     end
 })
 
-if MyInventory:FindFirstChild("Glider") or MyInventory:FindFirstChild("Easter Glider") then
-    MiscModSections:CreateSliderToggle({
-        Name = "Mod Glider Speed",
-        Min = 30,
-        Max = 300,
-        SliderDefault = 30,
-        Digits = 0,
-        ToggleDefault = false,
-        SliderFlag = "GliderModSpeed",
-        ToggleFlag = "GliderModSpeedToggle",
-        SliderCallback = function(Value) 
-            getgenv().GliderModSpeed = Value
-        end,
-        ToggleCallback = function(Value)
-            local GliderModule = require(LocalPlayer:WaitForChild('PlayerScripts'):WaitForChild('Main'):WaitForChild('ToolController'):WaitForChild('ToolObject'):WaitForChild('Controllers'):WaitForChild('Glider'))
-            if Value == true then
-                setconstant(GliderModule.Step, 9, tonumber(getgenv().GliderModSpeed))
-            else
-                setconstant(GliderModule.Step, 9, 30)
-            end
-        end
-    })
-end
-
 MiscModSections:CreateButton({
     Name = 'Restore Candy Mesh(not invisible)',
     Callback = function()
@@ -3358,7 +3325,7 @@ RealDupeSection:CreateToggle({
     end
 })
 
-ocal RealDupeSection = Dupe:CreateSection('Craft Armor')
+local RealDupeSection = Dupe:CreateSection('Craft Armor')
 
 RealDupeSection:CreateButton({
     Name = 'Craft Full Soul        	(REQ.  |   40 Soul',

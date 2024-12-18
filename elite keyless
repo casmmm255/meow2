@@ -7,7 +7,7 @@ local AtlasUi = Atlas.new({
     UseLoader = false;
     Bind = "LeftBracket";
     FullName = "Island Tribes";
-    CheckKey = nill
+    CheckKey = nil
     Discord = "https://discord.gg/radd9wnwNp";
 })
 

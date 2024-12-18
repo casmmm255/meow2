@@ -8,7 +8,6 @@ local AtlasUi = Atlas.new({
     Bind = "LeftBracket";
     FullName = "Island Tribes";
     CheckKey = nil
-    Discord = "https://discord.gg/radd9wnwNp";
 })
 
 HttpService = game:GetService("HttpService")

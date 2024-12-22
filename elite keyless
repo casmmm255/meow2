@@ -483,7 +483,7 @@ for id, name in pairs(ALLITEMS) do
     SWITCHEDITEMSTABLE[name] = id -- Maps the item name back to the numeric ID
 end
 getgenv().configs = {
-    Bypassing = false;
+    Bypassing = True;
     AutoPickup2 = false;
     InfJump = false;
     ClickTp = false;

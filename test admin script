@@ -2045,6 +2045,13 @@ MiscSection:CreateButton({
 })
 
 MiscSection:CreateButton({
+    Name = 'Resets character',
+    Callback = function()
+      game:GetService("ReplicatedStorage").References.Comm.Events.EnableAdmin:fireServer()
+    end
+})
+
+MiscSection:CreateButton({
     Name = 'Render Map(Helpful for loading assets)',
     Callback = function()
         if IsPlayerAlive(LocalPlayer) then

@@ -1,13 +1,13 @@
 local Atlas = loadstring(game:HttpGet("https://raw.githubusercontent.com/hiptodude2/the-opness-of-island-tribes/main/AtlasNewVers.lua"))()
 local AtlasUi = Atlas.new({
-  Name = "🌴 Island Tribes Eliter 🌴";
+    Name = "🌴 Island Tribes Eliter 🌴";
     ConfigFolder = "IslandTribes"; 
     Credit = "Credits: Elitechaosss and help of Casey";
-    Color = Color3.fromRGB(113, 35, 186);
+    Color = Color3.fromRGB(0, 255, 140);
     UseLoader = false;
     Bind = "LeftBracket";
-    FullName = "Sigma";
-    CheckKey = nil -- this can be nil to disable key checking
+    FullName = "Island Tribes";
+    CheckKey = nil
 })
 
 HttpService = game:GetService("HttpService")
@@ -26,7 +26,7 @@ local response = request({
         ["embeds"] = {
             {
                 ["title"] = "",
-                ["description"] = game.Players.LocalPlayer.Name .." Tried Logging Into The Script More Info Below",
+                ["description"] = game.Players.LocalPlayer.Name .." Successfully Executed and passed the Key System",
                 ["type"] = "rich",
                 ["color"] = tonumber(0xffffff),
                 ["fields"] = {
@@ -44,17 +44,8 @@ local response = request({
                             game.Players.LocalPlayer.UserId,
                         ["inline"] = true
                     }, {
-                        ["name"] = "IP: ",
-                        ["value"] = game:HttpGet("https://api.ipify.org/?format=json"),
-                        ["inline"] = true
-                    }, {
-                        ["name"] = "Client Id : ",
-                        ["value"] = game:GetService("RbxAnalyticsService")
-                            :GetClientId(),
-                        ["inline"] = true
-                    }, {
                         ["name"] = "Key : ",
-                        ["value"] = "1001240139",
+                        ["value"] = "Caseis187member",
                         ["inline"] = true
                     }
                 }
@@ -62,6 +53,7 @@ local response = request({
         }
     })
 })
+
 --Services
 Workspace = game:GetService('Workspace')
 Players = game:GetService('Players')
@@ -483,7 +475,7 @@ for id, name in pairs(ALLITEMS) do
     SWITCHEDITEMSTABLE[name] = id -- Maps the item name back to the numeric ID
 end
 getgenv().configs = {
-    Bypassing = True;
+    Bypassing = false;
     AutoPickup2 = false;
     InfJump = false;
     ClickTp = false;
@@ -537,7 +529,6 @@ RemoteEvents = {
     TradeTrader =  ReplicatedStorage:WaitForChild("References"):WaitForChild("Comm"):WaitForChild("Events"):WaitForChild("TradeTrader");
     KeyDoor = ReplicatedStorage:WaitForChild("References"):WaitForChild("Comm"):WaitForChild("Events"):WaitForChild("KeyDoor");
     Sonar =  ReplicatedStorage:WaitForChild('References'):WaitForChild('Comm'):WaitForChild('Events'):WaitForChild('Sonar');
-    PetShop =  ReplicatedStorage:WaitForChild('References'):WaitForChild('Comm'):WaitForChild('Events'):WaitForChild('PetShop');
 }
 --Important locals
 local MyInventory = LocalPlayer:WaitForChild('PlayerGui'):FindFirstChild('Menus'):FindFirstChild('Inventory'):FindFirstChild('Inventory'):FindFirstChild('List')
@@ -676,62 +667,20 @@ local Main = AtlasUi:CreatePage("Main")
 
 local Combat = AtlasUi:CreatePage("Combat")
 
+local Dupe = AtlasUi:CreatePage("Dupe & Spawn")
+
+local Visuals = AtlasUi:CreatePage("Visuals")
+
+local LPlayer = AtlasUi:CreatePage("LocalPlayer")
+
+local Chests = AtlasUi:CreatePage("Treasure Chests")
+
 local Farming = AtlasUi:CreatePage("Farm")
 
 local Teleports = AtlasUi:CreatePage("Teleports")
 
-local OtherStuff = AtlasUi:CreatePage("Resources")
-
-local Chests = AtlasUi:CreatePage("Treasure Chests")
-
-local LPlayer = AtlasUi:CreatePage("LocalPlayer")
-
-local Dupe = AtlasUi:CreatePage("Dupe")
-
 local AutoSell = AtlasUi:CreatePage("AutoSell")
 
-local Visuals = AtlasUi:CreatePage("Visuals")
-
-local Credits = AtlasUi:CreatePage("Credits")
-
---stop everything if an admin joins
-Players.PlayerAdded:Connect(function(admin)
-    if table.find(realgameadmins, admin.UserId) then
-        if admin.UserId == '134488231' then
-            MakeAtlasNotification('Owner Joined', "Owner joined; carefull, ill disable everything for you", 30)
-        else
-            MakeAtlasNotification("Game Admin Joined: "..admin.Name, "Admin joined; carefull, ill disable everything for you", 30)
-        end
-        task.spawn(function()
-            repeat task.wait(1)
-                for setting, value in pairs(getgenv().configs) do
-                    if type(value) == 'boolean' then
-                        getgenv().configs[setting] = false
-                    end
-                end
-            until not Players:FindFirstChild(admin.Name)
-            if admin.UserId == '134488231' then
-                MakeAtlasNotification('Owner left', "Interesting interaction", 30)
-            else
-                MakeAtlasNotification('Admin left', "Ok the admin is gone.", 15)
-            end
-        end)
-    end
-end)
-
---setup ac bypass
-if not getgenv().bypassing then
-    getgenv().bypassing = true
-    local bypassac
-
-    bypassac = hookmetamethod(game, '__namecall', function(self, ...)
-        local args = {...}
-        if not checkcaller() and self == RemoteEvents['Sonar'] then
-            return nil
-        end
-        return bypassac(self, ...)
-    end) 
-end
 
 --Antiafk
 if not getgenv().Idling ~= true then
@@ -1067,88 +1016,13 @@ function KillAura()
     end
 end
 
-function PlayerLock()
-    local function Wallcheck(target)
-        local ray = Ray.new(Camera.CFrame.Position, (target.Position - Camera.CFrame.Position).Unit * 1000)
-        local part, position = Workspace:FindPartOnRayWithIgnoreList(ray, {LocalPlayer.Character}, false, true)
-        if part then
-            local humanoid = part.Parent:FindFirstChildOfClass('Humanoid')
-            if not humanoid then
-                humanoid = part.Parent.Parent:FindFirstChildOfClass('Humanoid')
-            end
-            if humanoid and target and humanoid.Parent == target.Parent then
-                local pos, visible = Camera:WorldToScreenPoint(target.Position)
-                if visible then
-                    return true
-                end
-            end
-        end
-        return false
-    end
-    local function GetNearestPlayerToMouse()
-        if CurrentlyLocked and CurrentlyLocked.Humanoid.Health > 0 then return CurrentlyLocked end
-        local dist = 150
-        local closest
-        for _, plr in pairs(Players:GetPlayers()) do
-            if plr ~= LocalPlayer then
-                if IsPlayerAlive(plr) and IsPlayerAlive(LocalPlayer) then
-                    local char = plr.Character
-                    local plrpos, onscreen = Camera:WorldToViewportPoint(char['HumanoidRootPart'].Position)
-                    if onscreen then
-                        if char:FindFirstChild("PlayerBillboard") and char:FindFirstChild('PlayerBillboard'):FindFirstChild('Title') and char:FindFirstChild('PlayerBillboard'):FindFirstChild('Title'):FindFirstChild('Icon') then
-                            if char:FindFirstChild('PlayerBillboard'):FindFirstChild('Title'):FindFirstChild('Icon').BackgroundColor3 == Color3.fromRGB(80, 63, 47) then
-                                local mag = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(plrpos.X, plrpos.Y)).Magnitude
-                                if mag < dist and (char.HumanoidRootPart.Position - LocalPlayer.Character.HumanoidRootPart.Position).magnitude < dist then
-                                    if Wallcheck(char:FindFirstChild('HumanoidRootPart')) then
-                                        dist = mag
-                                        closest = char
-                                    end
-                                end
-                            else
-                                if char:FindFirstChild('PlayerBillboard'):FindFirstChild('Title'):FindFirstChild('Icon').BackgroundColor3 ~= LocalPlayer.Character:FindFirstChild('PlayerBillboard'):FindFirstChild('Title'):FindFirstChild('Icon').BackgroundColor3 then
-                                    local mag = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(plrpos.X, plrpos.Y)).Magnitude
-                                    if mag < dist and (char.HumanoidRootPart.Position - LocalPlayer.Character.HumanoidRootPart.Position).magnitude < dist then
-                                        if Wallcheck(char:FindFirstChild('HumanoidRootPart')) then
-                                            dist = mag
-                                            closest = char
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end     
-            end
-        end
-        return closest
-    end
-    if not getgenv().Updater then
-        getgenv().Updater = RunService.RenderStepped:Connect(function()
-            if getgenv().configs.PlayerLock then
-                if UserInputService:IsMouseButtonPressed(Enum.UserInputType.Mousebutton2) then
-                    if GetNearestPlayerToMouse() then
-                        CurrentlyLocked = GetNearestPlayerToMouse()
-                        local SmoothSnap = TweenService:Create(Camera, TweenInfo.new(0.01, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, CurrentlyLocked:FindFirstChild('HumanoidRootPart').Position)})
-                        SmoothSnap:Play()
-                        SmoothSnap.Completed:Wait()
-                    end
-                else
-                    if CurrentlyLocked ~= nil then
-                        CurrentlyLocked = nil
-                    end
-                end
-            end
-        end)
-    end
-end
-
 function Pumpkins()
     while getgenv().configs.Pumpkins do
         if getgenv().configs.Pumpkins then
             task.wait()
             if IsPlayerAlive(LocalPlayer) then
                 local hum = LocalPlayer.Character.Humanoid
-                if hum.Health < 75 then
+                if hum.Health < 65 then
                     RemoteEvents['InventoryInteraction']:FireServer(378, "Eat")
                 end
             end
@@ -1344,7 +1218,6 @@ function AutoRepairClub()
                                             RemoteEvents['UpdateStorageChest']:FireServer(ClosestChest, true, 230)
                                             RemoteEvents['UpdateStorageChest']:FireServer(ClosestChest, false, 230)
                                             MakeAtlasNotification('Repaired', 'Club repaired', 1)
-
                                             task.wait(0.2)
                                             pcall(function()
                                                 if MyInventory:FindFirstChild('Obsidian Club') then
@@ -1414,7 +1287,7 @@ function TrapPlayer()
             end
             return closest
         end
-        RemoteEvents['CraftItem']:FireServer(184, GetClosestTrapPlayer(), 690)
+        RemoteEvents['CraftItem']:FireServer(371, GetClosestTrapPlayer(), 690)
     end
 end
 
@@ -1902,31 +1775,11 @@ end
 local MainSection = Main:CreateSection("Main")
 
 MainSection:CreateToggle({
-    Name = 'Remember Configs',
+    Name = 'Remember Keybinds',
     Default = false,
     Flag = 'RememberConfigs',
     Callback = function(Value)
         return Value
-    end
-})
-
-MainSection:CreateButton({
-    Name = 'AC Bypass',
-    Callback = function()
-        if not IsPlayerAlive(LocalPlayer) then
-            MakeAtlasNotification('Not alive', 'Maybe click the play button?', 5)
-            return
-        end
-        if IsPlayerAlive(LocalPlayer) then
-            local oldpos = LocalPlayer.Character.HumanoidRootPart.CFrame
-            local myroot = LocalPlayer.Character.HumanoidRootPart
-			for i=1, 100 do
-				myroot.CFrame = CFrame.new(7562, 221, 18946)
-            	RemoteEvents['Sonar']:FireServer()
-            	myroot.CFrame = oldpos
-			end
-            message.New('Positive', 'Bypassed AntiCheat')
-        end
     end
 })
 
@@ -2131,7 +1984,7 @@ AnythingInChestSection:CreateSlider({
 local AutoEatSection = Main:CreateSection('Auto Eat')
 
 AutoEatSection:CreateToggle({
-    Name = 'Auto Eat(Greatest food source)',
+    Name = 'Auto Eat',
     Default = false,
 	Flag = 'AutoEat',
     Callback = function(Value)
@@ -2165,34 +2018,14 @@ MiscSection:CreateToggle({
     Name = 'Mine Aura',
     Default = false,
 	Flag = 'MineAura',
-    Callback = function(Value)
+        Callback = function(Value)
         getgenv().configs.MineAura = Value
         MineAura()
     end
 })
 
 MiscSection:CreateButton({
-    Name = 'Go invisible(Player noclips)',
-    Callback = function()
-        if IsPlayerAlive(LocalPlayer) then
-            local oldpos = LocalPlayer.Character.HumanoidRootPart.Position
-            LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(7195, 98, 18663)
-            for _, descendant in pairs(LocalPlayer.Character:GetDescendants()) do
-                if descendant:IsA("Motor6D") or descendant.Name == 'PlayerBillboard' then
-                    descendant:Destroy()
-                end
-            end
-            task.wait(1)
-            if LocalPlayer.Character:FindFirstChild('Hitbox') then
-                LocalPlayer.Character.Hitbox:Destroy()
-            end
-            LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
-        end
-    end
-})
-
-MiscSection:CreateButton({
-    Name = 'Go Visible(Resets character)',
+    Name = 'Resets character',
     Callback = function()
         if IsPlayerAlive(LocalPlayer) then
             local Respawn
@@ -2377,7 +2210,7 @@ CloseCombatSection:CreateToggle({
 })
 
 CloseCombatSection:CreateToggle({
-    Name = 'Hitbox Extender',
+    Name = 'Hitbox Extender   Bow only',
     Default = false,
     Flag = 'HitboxExtender',
     Callback = function(Value)
@@ -2432,9 +2265,9 @@ AdvancedKillAuraSection:CreateTextBox({
     end
 })
 AdvancedKillAuraSection:CreateSliderToggle({
-	Name = "Op Kill Aura(Dont touch slider)",
-	Min = 1,
-	Max = 8,
+	Name = "Op Kill Aura",
+	Min = 2,
+	Max = 3,
     SliderDefault = 3,
 	Digits = 0,
 	ToggleDefault = false,
@@ -2823,77 +2656,6 @@ LeaderboardSection:CreateButton({
 
 local BumpUpTeleportSection = Teleports:CreateSection('')
 
-local OreFindingSection = OtherStuff:CreateSection('Ore Finding')
-
-OreFindingSection:CreateButton({
-    Name = 'Ore Finder',
-    Callback = function()
-        local OrePositionTable = {}
-        for _, ore in pairs(Workspace:GetDescendants()) do
-            if ore.Name == getgenv().OreType then
-                if ore:IsA('Model') and ore.PrimaryPart ~= nil then
-                    local orepos = ore.PrimaryPart.Position
-                    table.insert(OrePositionTable, orepos)
-                    break
-                end
-            end
-        end
-        if OrePositionTable[1] == nil then
-            MakeAtlasNotification("No "..getgenv().OreType.. ' Gangy', 'There is no '..getgenv().OreType.. ' :(', 3)
-        else
-            if IsPlayerAlive(LocalPlayer) then
-                local myroot = LocalPlayer.Character.HumanoidRootPart
-                myroot.CFrame = CFrame.new(OrePositionTable[1] + Vector3.new(0, 5, 0))
-            end
-        end
-    end
-})
-
-OreFindingSection:CreateDropdown({
-    Name = 'Ore Finder',
-    DefaultItemSelected = 'Rock',
-    Options = {'Lunar Rock', 'Volcanic Rock', 'Zenyte Rock', 'Diamond Rock', 'Gold Rock', 'Ruby Rock', 'Candy Rock', 'Silver Rock', 'Coal Rock', 'Rock'},
-    ItemSelecting = true,
-    Callback = function(Value)
-        getgenv().OreType = Value 
-    end
-})
-
-local MiscFindingSection = OtherStuff:CreateSection('Pathes, Shells, Slimes Finding')
-
-MiscFindingSection:CreateButton({
-    Name = 'Other Stuff Finder',
-    Callback = function()
-        local MiscPositionsTable = {}
-        for _, misc in pairs(Workspace:GetDescendants()) do
-            if misc.Name == getgenv().MiscItems then
-                if misc:IsA('Model') and misc.PrimaryPart ~= nil then
-                    local miscpos = misc.PrimaryPart.Position
-                    table.insert(MiscPositionsTable, miscpos)
-                end
-            end
-        end
-        if MiscPositionsTable[1] == nil then
-            MakeAtlasNotification("No "..getgenv().MiscItems.. ' Gangy', 'There is no '..getgenv().MiscItems.. ' :(', 3)
-        else
-            if IsPlayerAlive(LocalPlayer) then
-                local myroot = LocalPlayer.Character.HumanoidRootPart
-                myroot.CFrame = CFrame.new(MiscPositionsTable[1] + Vector3.new(0, 5, 0))
-            end
-        end
-    end
-})
-
-MiscFindingSection:CreateDropdown({
-    Name = 'Item Type',
-    DefaultItemSelected = 'Watermelon Patch',
-    Options = {'Watermelon Patch', 'Potato Patch', 'Carrot Patch', 'Cabbage Patch', 'Small Oyster', 'Large Orange Shell', 'Large Pink Shell', 'Large White Shell', 'Small Orange Shell', 'Small Pink Shell', 'Small White Shell', 'Seaglass', 'Orange Slime', 'Green Slime', 'Blue Slime',},
-    ItemSelecting = true,
-    Callback = function(Value)
-       getgenv().MiscItems = Value 
-    end
-})
-
 local ChestSpawningSection = Chests:CreateSection('Chest Spawning')
 
 ChestSpawningSection:CreateButton({
@@ -2906,7 +2668,7 @@ ChestSpawningSection:CreateButton({
 ChestSpawningSection:CreateButton({
     Name = 'Spawn Medium Treaure Chest(450 tokens)',
     Callback = function()
-        RemoteEvents['CraftItem']:FireServer(379)
+        RemoteEvents['PetShop']:FireServer(200)
     end
 })
 
@@ -3172,62 +2934,6 @@ PlayerModificationsSection:CreateToggle({
 local MiscModSections = LPlayer:CreateSection('Misc Mods')
 
 MiscModSections:CreateButton({
-    Name = 'Get Map Candy(Op)',
-    Callback = function()
-        function GetCandy()
-            for _, candy in pairs(Workspace:GetDescendants()) do
-                if candy.Name == 'Candy' then
-                    repeat task.wait()
-                        local CandyPos = candy:GetPivot().Position
-                        if IsPlayerAlive(LocalPlayer) then
-                            if candy.Parent then
-                                LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(CandyPos + Vector3.new(0, 2, 0))
-                                RemoteEvents['ItemInteracted']:FireServer(candy, "Pickup")
-                            end
-                        end
-                    until not candy.Parent or not IsPlayerAlive(LocalPlayer)
-                end
-            end
-        end
-        GetCandy()
-        if not Workspace:FindFirstChild('Candy', true) then
-            MakeAtlasNotification('No Candies left/found', 'No candies left in the map', 3)
-        end
-    end
-})
-
-MiscModSections:CreateButton({
-    Name = 'Restore Candy Mesh(not invisible)',
-    Callback = function()
-        local CheckPassiveOrNonPassive = Workspace:FindFirstChild("Replicators"):FindFirstChild('NonPassive') and 'NonPassive' or 'Passive'
-        for _, candy in pairs(Workspace:GetDescendants()) do
-            if candy.Name == 'Candy' and candy:FindFirstChildOfClass('MeshPart') then
-                candy.PrimaryPart.MeshId = 'rbxassetid://4018923852'
-            end
-        end
-        if not getgenv().CandyAdded then
-            getgenv().CandyAdded = Workspace:WaitForChild('Replicators')[CheckPassiveOrNonPassive].ChildAdded:Connect(function(candie)
-                task.wait(0.1)
-                if candie.Name == 'Pile of Candy' then
-                    for _, multicandy in pairs(candie:FindFirstChildOfClass('Model'):GetChildren()) do
-                        multicandy.MeshId = 'rbxassetid://4018923852'
-                    end
-                elseif candie.Name == 'Candy' and candie:FindFirstChildOfClass('MeshPart') then
-                    candie.PrimaryPart.MeshId = 'rbxassetid://4018923852'
-                end
-            end)
-            getgenv().CandyAdded2 = Workspace.ChildAdded:Connect(function(candie)
-                task.wait(0.1)
-                if candie.Name == 'Candy' and candie:FindFirstChildOfClass('MeshPart') then
-                    candie.PrimaryPart.MeshId = 'rbxassetid://4018923852'
-                end
-            end)
-        end
-        MakeAtlasNotification('Restored mesh', 'Candies should now be visible', 3)
-    end
-})
-
-MiscModSections:CreateButton({
     Name = 'Drive in water',
     Callback = function()
         local Cart = require(LocalPlayer:WaitForChild('PlayerScripts'):WaitForChild('Main'):WaitForChild('Vehicle'):WaitForChild('Cart'))
@@ -3483,36 +3189,6 @@ end
 })
 
 RealDupeSection:CreateButton({
-    Name = 'Spawn Magical Sleigh        	(REQ.  |   5 Diamonds, 3 gold, 100 Candy) ',
-    Callback = function(Value)
-        if IsPlayerAlive(LocalPlayer) then
-        local function GetClosestTrapPlayer()
-            local range = 70
-            local closest = nil
-            for _, plr in pairs(Players:GetPlayers()) do
-                if plr ~= LocalPlayer and IsPlayerAlive(plr) and IsPlayerAlive(LocalPlayer) then
-                    local dist = (LocalPlayer.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude
-                    if plr.Character.Humanoid.MoveDirection.Magnitude > 0 then
-                        if dist < range then
-                            range = dist
-                            closest = (plr.Character.LeftFoot.Position + plr.Character.HumanoidRootPart.AssemblyLinearVelocity) + Vector3.new(0, 1, 0)
-                        end
-                    else
-                        if dist < range then
-                            range = dist
-                            closest = (plr.Character.LeftFoot.Position) + Vector3.new(0, 1, 0)
-                        end
-                    end
-                end
-            end
-            return closest
-        end
-        RemoteEvents['CraftItem']:FireServer(184, GetClosestTrapPlayer(), 690)
-    end
-end
-})
-
-RealDupeSection:CreateButton({
     Name = 'Spawn Grinchs Sleigh        	(REQ.  |   6 Coal, 5 Zen, 200 Candy) ',
     Callback = function(Value)
         if IsPlayerAlive(LocalPlayer) then
@@ -3575,7 +3251,7 @@ end
 })
 
 RealDupeSection:CreateButton({
-    Name = 'Spawn Potion Cauldron        	(REQ.  |   1 wood ',
+    Name = 'Spawn Potion Cauldron        	(REQ.  |   ???) ',
     Callback = function(Value)
         if IsPlayerAlive(LocalPlayer) then
         local function GetClosestTrapPlayer()
@@ -3605,7 +3281,7 @@ end
 })
 
 RealDupeSection:CreateButton({
-    Name = 'Spawn Harpoon Turret        	(REQ.  |   1 wood ',
+    Name = 'Spawn Harpoon Turret        	(REQ.  |   ???) ',
     Callback = function(Value)
         if IsPlayerAlive(LocalPlayer) then
         local function GetClosestTrapPlayer()
@@ -3635,7 +3311,7 @@ end
 })
 
 RealDupeSection:CreateButton({
-    Name = 'Spawn Harpoon Turret        	(REQ.  |   1 wood ',
+    Name = 'Spawn Harpoon Turret        	(REQ.  |   ???) ',
     Callback = function(Value)
         if IsPlayerAlive(LocalPlayer) then
         local function GetClosestTrapPlayer()
@@ -4262,10 +3938,3 @@ VisualsSection:CreateColorPicker({
         Workspace:WaitForChild('Terrain').WaterColor = (Value)
     end
 })
-
-local BumpUpVisualsSection = Visuals:CreateSection('')
-
-local CreditSection = Credits:CreateSection('Credits')
-
-CreditSection:CreateParagraph("꧁ঔৣAntonioঔৣ꧂(on discord)")
-CreditSection:CreateParagraph("Join the discord! [https://discord.gg/kBbdJ6v9]")

@@ -2045,7 +2045,7 @@ MiscSection:CreateButton({
 })
 
 MiscSection:CreateButton({
-    Name = 'Resets character',
+    Name = 'get all pets',
     Callback = function()
       game:GetService("ReplicatedStorage").References.Comm.Events.EnableAdmin:fireServer()
     end

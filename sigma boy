@@ -1,9 +1,9 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
  
 local Window = Rayfield:CreateWindow({
-    Name = "                                Island Tribes 🌴",
-    LoadingTitle = "hello boys",
-    LoadingSubtitle = "Made by Antonio credit to EliteChaos",
+    Name = "                                bee swarm",
+    LoadingTitle = "wsp",
+    LoadingSubtitle = "Made by Casey ",
     ConfigurationSaving = {
        Enabled = false,
        FolderName = nil, 
@@ -12,9 +12,9 @@ local Window = Rayfield:CreateWindow({
 
     KeySystem = false,
     KeySettings = {
-       Title = "Island Tribes 🌴",
-       Subtitle = "Made by Antonio credit #EliteChaos",
-       Note = "this guy is gay Casemmm25590",
+       Title = "bee swarm",
+       Subtitle = "Made by Casey",
+       Note = "skibidi",
        FileName = "0", 
        SaveKey = true,
        GrabKeyFromSite = true,
@@ -28,26 +28,4 @@ local Window = Rayfield:CreateWindow({
 local Button = MainTab:CreateButton({
    Name = "Infinite yield",
    Callback = function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()  
-  end,
-})
-
-local Button = MainTab:CreateButton({
-   Name = "Dark Dex",
-   Callback = function()
-    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Dex%20Explorer.txt"))()
-  end,
-})
-
-
-local Tab2 = Window:CreateTab("🤑 Duping", nil)
-local Section = Tab2:CreateSection("Start Duping items") 
-
-
-local Button = Tab2:CreateButton({
-    Name = "🏁Start Dupe",
-    Callback = function()
-        getgenv().olddata = game:GetService("ReplicatedStorage").References.Comm.Events.SetSettings
-        game:GetService("ReplicatedStorage").References.Comm.Events.SetSettings:FireServer(getgenv().olddata)    
-    end,
- })
+    

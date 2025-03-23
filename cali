@@ -36,8 +36,8 @@ function Script()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2452.79028, 110.34993, -214.399796, -1, 0, 0, 0, 1, 0, 0, 0, -1)
     end)
 
-    FarmSection:NewButton("casino", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
+    FarmSection:NewButton("casino drop off", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2608.33252, 5.34999943, -492.200134)
     end)
 
     local Teleports = Window:NewTab("Teleports")

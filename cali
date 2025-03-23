@@ -3,7 +3,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 
 
 function Script()
-    local Window = Library.CreateLib("Casey thing", "Synapse")
+    local Window = Library.CreateLib("Casey thing", "pink")
 
 
 
@@ -156,6 +156,10 @@ function Script()
 
 TurfsSection:NewButton("TNK", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1098.61072, 17.5179844, 917.185852, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+    end)
+
+TurfsSection:NewButton("SS", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1663.59619, -24.0600967, -26.6962891, 0, 0, 1, 0, 1, -0, -1, 0, 0)
     end)
 
     -- Credits

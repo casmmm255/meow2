@@ -25,7 +25,7 @@ function Script()
     end)
 
     FarmSection:NewButton("Chase Safe", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2324.0564, 2.77611637, 131.680298, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2347.01489, 2.77823353, 150.766724, 1, 0, -0, 0, 0, 1, 0, -1, 0)
     end)
 
     FarmSection:NewButton("Chase DropOff", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
@@ -36,6 +36,10 @@ function Script()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2452.79028, 110.34993, -214.399796, -1, 0, 0, 0, 1, 0, 0, 0, -1)
     end)
 
+    FarmSection:NewButton("Apartment Check Printer proxy prompt 0 sec", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
+        workspace.OtherItems.CheckTable.CloneC.ProximityPrompt1.HoldDuration = 0
+    end)
+
     FarmSection:NewButton("casino safe", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2351.57739, -25.2481918, -731.011841)
     end)
@@ -43,6 +47,8 @@ function Script()
     FarmSection:NewButton("casino drop off", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2608.33252, 5.34999943, -492.200134)
     end)
+
+    --proxy prompt go's to zero
 
     local prox = Window:NewTab("prox prompts")
     local ProximityPromptSection = prox:NewSection("prox Prompt ")
@@ -54,6 +60,39 @@ function Script()
     ProximityPromptSection:NewButton("casino gold stack", "!!!", function()
     workspace.Bank.Loot.GoldStack.ProximityPrompt.HoldDuration = 0
     end)
+
+    ProximityPromptSection:NewButton("night money stack", "!!!", function()
+    workspace:GetChildren()[321].Loot:GetChildren()[13].ProximityPrompt.HoldDuration = 0
+    end)
+
+    ProximityPromptSection:NewButton("night money stack 2", "!!!", function()
+    workspace:GetChildren()[321].Loot.MoneyStack.ProximityPrompt.HoldDuration = 0
+    end)
+
+    ProximityPromptSection:NewButton("night painting ", "!!!", function()
+    workspace:GetChildren()[321].Loot.Painting.ProximityPrompt.HoldDuration = 0
+    end)
+
+    ProximityPromptSection:NewButton("night paintin 2", "!!!", function()
+    workspace:GetChildren()[321].Loot:GetChildren()[26].ProximityPrompt.HoldDuration = 0
+    end)
+
+    ProximityPromptSection:NewButton("night money bag", "!!!", function()
+    workspace:GetChildren()[321].Loot.MoneyBag.ProximityPrompt.HoldDuration = 0
+    end)
+
+    ProximityPromptSection:NewButton("bank money bag", "!!!", function()
+    workspace.Bank.Loot.MoneyBag.ProximityPrompt.HoldDuration = 0
+    end)
+
+    ProximityPromptSection:NewButton("bank money bag 2", "!!!", function()
+    workspace.Bank.Loot:GetChildren()[32].ProximityPrompt.HoldDuration = 0
+    end)
+
+    ProximityPromptSection:NewButton("casino money bag ", "!!!", function()
+    workspace:GetChildren()[321].Loot:GetChildren()[26].ProximityPrompt.HoldDuration = 0
+    end)
+
 
     local Teleports = Window:NewTab("Teleports")
     local TeleportsSection = Teleports:NewSection("Teleports")

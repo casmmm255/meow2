@@ -44,7 +44,7 @@ function Script()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2608.33252, 5.34999943, -492.200134)
     end)
 
-    FarmSection:NewButton("casino drop off", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
+    FarmSection:NewButton("spawn dirt bike", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
         game:GetService("ReplicatedStorage").SpawnDirtbike:FireServer()
     end)
 

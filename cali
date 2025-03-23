@@ -37,7 +37,7 @@ function Script()
     end)
 
     FarmSection:NewButton("casino safe", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2351.57739, -25.2481918, -731.011841, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2351.57739, -25.2481918, -731.011841)
     end)
 
     FarmSection:NewButton("casino drop off", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)

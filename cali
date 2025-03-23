@@ -44,10 +44,16 @@ function Script()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2608.33252, 5.34999943, -492.200134)
     end)
 
-    FarmSection:NewButton("spawn dirt bike", "!!!", function() -- 500 (MaxValue) | 0 (MinValue)
-        game:GetService("ReplicatedStorage").SpawnDirtbike:FireServer()
+    local prox = Window:NewTab("prox prompts")
+    local ProximityPromptSection = prox:NewSection("prox Prompt ")
+
+    ProximityPromptSection:NewButton("bank gold stack", "!!!", function()
+    workspace:GetChildren()[324].Loot.GoldStack.ProximityPrompt.HoldDuration = 0
     end)
 
+    ProximityPromptSection:NewButton("casino gold stack", "!!!", function()
+    workspace.Bank.Loot.GoldStack.ProximityPrompt.HoldDuration = 0
+    end)
 
     local Teleports = Window:NewTab("Teleports")
     local TeleportsSection = Teleports:NewSection("Teleports")

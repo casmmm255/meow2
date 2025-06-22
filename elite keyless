@@ -2972,7 +2972,7 @@ local ChestOpeningSection = Chests:CreateSection('Chest Opening')
 ChestOpeningSection:CreateButton({
     Name = 'craft ting',
     Callback = function()
-        RemoteEvents['CraftItem']:FireServer(215)
+        RemoteEvents['CraftItem']:FireServer(379)
     end
 })
 

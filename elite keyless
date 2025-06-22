@@ -3340,7 +3340,7 @@ RealDupeSection:CreateButton({
     Name = 'Stop data(dupe)',
     Callback = function(Value)
 	getgenv().olddata = game:GetService("ReplicatedStorage").References.Comm.Events.SetSettings
-	wgame:GetService("ReplicatedStorage").References.Comm.Events.SetSettings:FireServer(getgenv().olddata)
+	game:GetService("ReplicatedStorage").References.Comm.Events.SetSettings:FireServer(getgenv().olddata)
     end
 })
 

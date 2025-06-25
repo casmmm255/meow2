@@ -2,10 +2,10 @@
 
 local Atlas = loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealGamer903/IslandTribesObliterator/refs/heads/main/Atlas"))()
 local AtlasUi = Atlas.new({
-    Name = "Island Tribes Oblitorator";
+    Name = "Island Tribes Oblitorator (not made by casey only added spawning buildings)";
     ConfigFolder = "IslandTribes"; 
     Credit = "Credits: zvvpe TheRealGamer903#7339";
-    Color = Color3.fromRGB(0, 255, 0);
+    Color = Color3.fromRGB(230, 0, 230);
     UseLoader = false;
     Bind = "LeftBracket";
     FullName = "Island Tribes Oblitorator";
@@ -2905,10 +2905,10 @@ MiscFindingSection:CreateDropdown({
     end
 })
 
-local ChestSpawningSection = Chests:CreateSection('Chest Spawning')
+local ChestSpawningSection = Chests:CreateSection('Spawning stuff (u will need a person near u to spawn things) ')
 
 ChestSpawningSection:CreateButton({
-    Name = 'spawn slave )',
+    Name = 'spawn sleigh (cost 150 candy, 3 gold, 5 diamonds )',
         Callback = function()
            if IsPlayerAlive(LocalPlayer) then
         local function GetClosestTrapPlayer()
@@ -2938,7 +2938,7 @@ end
 })
 
 ChestSpawningSection:CreateButton({
-    Name = 'Spawn slave ship)',
+    Name = 'Spawn pirate ship everyting execpt sleigh is 3 wood to spawn )',
         Callback = function()
            if IsPlayerAlive(LocalPlayer) then
         local function GetClosestTrapPlayer()
@@ -3030,9 +3030,9 @@ end
 local ChestOpeningSection = Chests:CreateSection('Chest Opening')
 
 ChestOpeningSection:CreateButton({
-    Name = 'craft ting wood ',
+    Name = 'craft  ',
     Callback = function()
-        RemoteEvents['CraftItem']:FireServer(7)
+        RemoteEvents['CraftItem']:FireServer()
     end
 })
 
@@ -3658,9 +3658,9 @@ ArmorTraderSection:CreateButton({
 })
 
 ArmorTraderSection:CreateButton({
-    Name = 'Ruby Helmet = 15 Token',
+    Name = 'Ruby snowball',
     Callback = function()
-        RemoteEvents['TradeTrader']:FireServer("Armour Trader", 31)
+        RemoteEvents['TradeTrader']:FireServer("Frosty", 3)
     end
 })
 

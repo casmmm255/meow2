@@ -3658,9 +3658,9 @@ ArmorTraderSection:CreateButton({
 })
 
 ArmorTraderSection:CreateButton({
-    Name = 'Ruby snowball',
+    Name = 'pet trader',
     Callback = function()
-        RemoteEvents['TradeTrader']:FireServer("Frosty", 3)
+        RemoteEvents['TradeTrader']:FireServer("Pet Trader", 1)
     end
 })
 

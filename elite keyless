@@ -3660,7 +3660,7 @@ ArmorTraderSection:CreateButton({
 ArmorTraderSection:CreateButton({
     Name = 'pet trader',
     Callback = function()
-        RemoteEvents['TradeTrader']:FireServer("Pet Trader", 1)
+        RemoteEvents['TradeTrader']:FireServer("Frosty", 3)
     end
 })
 

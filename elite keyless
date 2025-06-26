@@ -3046,7 +3046,7 @@ ChestOpeningSection:CreateButton({
 ChestOpeningSection:CreateButton({
     Name = 'spawn event',
     Callback = function()
-        RemoteEvents['BuyWorldEvent']:FireServer(5)
+        RemoteEvents['BuyWorldEvent']:FireServer(4)
     end
 })
 

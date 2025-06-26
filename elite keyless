@@ -3044,9 +3044,9 @@ ChestOpeningSection:CreateButton({
 })
 
 ChestOpeningSection:CreateButton({
-    Name = 'Open Medium Chest',
+    Name = 'spawn event',
     Callback = function()
-        RemoteEvents['InventoryInteraction']:FireServer(167, "Open")
+        RemoteEvents['BuyWorldEvent']:FireServer(6)
     end
 })
 

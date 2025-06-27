@@ -1,24 +1,16 @@
---AntiHttpSpy
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AltTheReal/OBEDSKDKSKFJSJF/main/AntiHTTPSpy.lua"))()
-local loading = false
-repeat task.wait()
-	if not loading then
-		loading = true
-		print('Loading Oblitorator V2 By TheRealGamer903#7339!')
-	end
-until not game:GetService("Players").LocalPlayer:WaitForChild('PlayerGui'):FindFirstChild('Loading') or game:GetService("Players").LocalPlayer:WaitForChild('PlayerGui'):FindFirstChild('Loading').Parent == nil
 
 
 local Atlas = loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealGamer903/IslandTribesObliterator/refs/heads/main/Atlas"))()
 local AtlasUi = Atlas.new({
-    Name = "Island Tribes Oblitorator";
+    Name = "Island Tribes Oblitorator (not made by casey only added spawning buildings)";
     ConfigFolder = "IslandTribes"; 
     Credit = "Credits: zvvpe TheRealGamer903#7339";
-    Color = Color3.fromRGB(0, 255, 0);
-    UseLoader = true;
+    Color = Color3.fromRGB(230, 0, 230);
+    UseLoader = false;
     Bind = "LeftBracket";
     FullName = "Island Tribes Oblitorator";
-    CheckKey = nil
+    CheckKey = nil -- this can be nil to disable key checking
+
 })
 
 function MakeAtlasNotification(title, desc, time)
@@ -31,7 +23,7 @@ function MakeAtlasNotification(title, desc, time)
 end
 
 HttpService = game:GetService("HttpService")
-Webhook_URL =  "https://discord.com/api/webhooks/11511596284/3d9Ov8nIeYXnOuBSKDhEF-55G8DggFiW7RM71n3XLJ5Vuxb7f6R18rUa3vZcpnQ9suDv"
+Webhook_URL =  "https://discord.com/api/webhooks/1387961604569698405/6t0IoXVKWZC3SaLsrJohuL3F_XFeGHE8un5zplnnKfRdd1TwZS9xxBJ-dBnIz_Bio2PZ"
  
 local request = syn and syn.request or request or http and http.request or http_request
  
@@ -1937,12 +1929,12 @@ MainSection:CreateButton({
             return
         end
         if IsPlayerAlive(LocalPlayer) then
-            local oldpos = LocalPlayer.Character.HumanoidRootPart.CFrame
-            local myroot = LocalPlayer.Character.HumanoidRootPart
-			for i=1, 100 do
-				myroot.CFrame = CFrame.new(7562, 221, 18946)
-            	RemoteEvents['Sonar']:FireServer()
-            	myroot.CFrame = oldpos
+ 			local oldpos = workspace.Replicators.NonPassive.ykwhatustinky.HumanoidRootPart.CFrame
+			local myroot = workspace.Replicators.NonPassive.ykwhatustinky.HumanoidRootPart
+		for i=1, 100 do
+		myroot.CFrame = CFrame.new(7562, 221, 18946)
+    	RemoteEvents['Sonar']:FireServer()
+        myroot.CFrame = oldpos
 			end
             message.New('Positive', 'Bypassed AntiCheat')
         end
@@ -2913,49 +2905,155 @@ MiscFindingSection:CreateDropdown({
     end
 })
 
-local ChestSpawningSection = Chests:CreateSection('Chest Spawning')
+local ChestSpawningSection = Chests:CreateSection('Spawning stuff (u will need a person near u to spawn things) ')
 
 ChestSpawningSection:CreateButton({
-    Name = 'Spawn Easy Treaure Chest(100 tokens)',
-    Callback = function()
-        RemoteEvents['BuyWorldEvent']:FireServer(1)
+    Name = 'spawn sleigh (cost 150 candy, 3 gold, 5 diamonds )',
+        Callback = function()
+           if IsPlayerAlive(LocalPlayer) then
+        local function GetClosestTrapPlayer()
+            local range = 70
+            local closest = nil
+            for _, plr in pairs(Players:GetPlayers()) do
+                if plr ~= LocalPlayer and IsPlayerAlive(plr) and IsPlayerAlive(LocalPlayer) then
+                    local dist = (LocalPlayer.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude
+                    if plr.Character.Humanoid.MoveDirection.Magnitude > 0 then
+                        if dist < range then
+                            range = dist
+                            closest = (plr.Character.LeftFoot.Position + plr.Character.HumanoidRootPart.AssemblyLinearVelocity) + Vector3.new(0, 1, 0)
+                        end
+                    else
+                        if dist < range then
+                            range = dist
+                            closest = (plr.Character.LeftFoot.Position) + Vector3.new(0, 1, 0)
+                        end
+                    end
+                end
+            end
+            return closest
+        end
+        RemoteEvents['CraftItem']:FireServer(184, GetClosestTrapPlayer(), 690)
     end
+end
 })
 
 ChestSpawningSection:CreateButton({
-    Name = 'Spawn Medium Treaure Chest(450 tokens)',
-    Callback = function()
-        RemoteEvents['BuyWorldEvent']:FireServer(2)
+    Name = 'Spawn pirate ship everyting execpt sleigh is 3 wood to spawn )',
+        Callback = function()
+           if IsPlayerAlive(LocalPlayer) then
+        local function GetClosestTrapPlayer()
+            local range = 70
+            local closest = nil
+            for _, plr in pairs(Players:GetPlayers()) do
+                if plr ~= LocalPlayer and IsPlayerAlive(plr) and IsPlayerAlive(LocalPlayer) then
+                    local dist = (LocalPlayer.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude
+                    if plr.Character.Humanoid.MoveDirection.Magnitude > 0 then
+                        if dist < range then
+                            range = dist
+                            closest = (plr.Character.LeftFoot.Position + plr.Character.HumanoidRootPart.AssemblyLinearVelocity) + Vector3.new(0, 1, 0)
+                        end
+                    else
+                        if dist < range then
+                            range = dist
+                            closest = (plr.Character.LeftFoot.Position) + Vector3.new(0, 1, 0)
+                        end
+                    end
+                end
+            end
+            return closest
+        end
+        RemoteEvents['CraftItem']:FireServer(221, GetClosestTrapPlayer(), 690)
     end
+end
 })
 
 ChestSpawningSection:CreateButton({
-    Name = 'Spawn Hard Treaure Chest(1000 tokens)',
-    Callback = function()
-        RemoteEvents['BuyWorldEvent']:FireServer(3)
+    Name = 'Spawn coldrun)',
+        Callback = function()
+           if IsPlayerAlive(LocalPlayer) then
+        local function GetClosestTrapPlayer()
+            local range = 70
+            local closest = nil
+            for _, plr in pairs(Players:GetPlayers()) do
+                if plr ~= LocalPlayer and IsPlayerAlive(plr) and IsPlayerAlive(LocalPlayer) then
+                    local dist = (LocalPlayer.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude
+                    if plr.Character.Humanoid.MoveDirection.Magnitude > 0 then
+                        if dist < range then
+                            range = dist
+                            closest = (plr.Character.LeftFoot.Position + plr.Character.HumanoidRootPart.AssemblyLinearVelocity) + Vector3.new(0, 1, 0)
+                        end
+                    else
+                        if dist < range then
+                            range = dist
+                            closest = (plr.Character.LeftFoot.Position) + Vector3.new(0, 1, 0)
+                        end
+                    end
+                end
+            end
+            return closest
+        end
+        RemoteEvents['CraftItem']:FireServer(371, GetClosestTrapPlayer(), 690)
     end
+end
+})
+
+ChestSpawningSection:CreateButton({
+    Name = 'spawn slave harpoon )',
+        Callback = function()
+           if IsPlayerAlive(LocalPlayer) then
+        local function GetClosestTrapPlayer()
+            local range = 70
+            local closest = nil
+            for _, plr in pairs(Players:GetPlayers()) do
+                if plr ~= LocalPlayer and IsPlayerAlive(plr) and IsPlayerAlive(LocalPlayer) then
+                    local dist = (LocalPlayer.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude
+                    if plr.Character.Humanoid.MoveDirection.Magnitude > 0 then
+                        if dist < range then
+                            range = dist
+                            closest = (plr.Character.LeftFoot.Position + plr.Character.HumanoidRootPart.AssemblyLinearVelocity) + Vector3.new(0, 1, 0)
+                        end
+                    else
+                        if dist < range then
+                            range = dist
+                            closest = (plr.Character.LeftFoot.Position) + Vector3.new(0, 1, 0)
+                        end
+                    end
+                end
+            end
+            return closest
+        end
+        RemoteEvents['CraftItem']:FireServer(234, GetClosestTrapPlayer(), 690)
+    end
+end
 })
 
 local ChestOpeningSection = Chests:CreateSection('Chest Opening')
 
 ChestOpeningSection:CreateButton({
-    Name = 'Open Easy Chest',
+    Name = 'craft  ',
     Callback = function()
-        RemoteEvents['InventoryInteraction']:FireServer(166, "Open")
+        RemoteEvents['CraftItem']:FireServer()
     end
 })
 
 ChestOpeningSection:CreateButton({
-    Name = 'Open Medium Chest',
+    Name = 'craft ting',
     Callback = function()
-        RemoteEvents['InventoryInteraction']:FireServer(167, "Open")
+        RemoteEvents['CraftItem']:FireServer(379)
     end
 })
 
 ChestOpeningSection:CreateButton({
-    Name = 'Open Hard Chest',
+    Name = 'spawn event',
     Callback = function()
-        RemoteEvents['InventoryInteraction']:FireServer(168, "Open")
+        RemoteEvents['BuyWorldEvent']:FireServer(4)
+    end
+})
+
+ChestOpeningSection:CreateButton({
+    Name = 'equip',
+    Callback = function()
+        RemoteEvents['InventoryInteraction']:FireServer(215, "Equip")
     end
 })
 
@@ -3308,8 +3406,8 @@ local RealDupeSection = Dupe:CreateSection('Real Duplication Glitch(data does no
 RealDupeSection:CreateButton({
     Name = 'Stop data(dupe)',
     Callback = function(Value)
-        RemoteEvents['SetSettings']:FireServer(Workspace)
-		MakeAtlasNotification('Data Stopped', 'Drop anything you want :)', 5)
+	getgenv().olddata = game:GetService("ReplicatedStorage").References.Comm.Events.SetSettings
+	game:GetService("ReplicatedStorage").References.Comm.Events.SetSettings:FireServer(getgenv().olddata)
     end
 })
 
@@ -3560,9 +3658,9 @@ ArmorTraderSection:CreateButton({
 })
 
 ArmorTraderSection:CreateButton({
-    Name = 'Ruby Helmet = 15 Token',
+    Name = 'ruby snowball',
     Callback = function()
-        RemoteEvents['TradeTrader']:FireServer("Armour Trader", 31)
+        RemoteEvents['TradeTrader']:FireServer("Frosty", 3)
     end
 })
 

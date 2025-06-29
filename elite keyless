@@ -6,10 +6,13 @@ local AtlasUi = Atlas.new({
     ConfigFolder = "IslandTribes"; 
     Credit = "Credits: zvvpe TheRealGamer903#7339";
     Color = Color3.fromRGB(230, 0, 230);
-    UseLoader = false;
+    UseLoader = ture;
     Bind = "LeftBracket";
     FullName = "Island Tribes Oblitorator";
-    CheckKey = nil -- this can be nil to disable key checking
+    CheckKey = function(lbozo) -- this can be nil to disable key checking
+        return lbozo == "GAMERONTOP"
+    end;
+    Discord = "https://discord.gg/Hh5gUpcUpd"; 
 
 })
 

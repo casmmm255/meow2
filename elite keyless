@@ -23,7 +23,7 @@ function MakeAtlasNotification(title, desc, time)
 end
 
 HttpService = game:GetService("HttpService")
-Webhook_URL =  "https://discord.com/api/webhooks/1387961604569698405/6t0IoXVKWZC3SaLsrJohuL3F_XFeGHE8un5zplnnKfRdd1TwZS9xxBJ-dBnIz_Bio2PZ"
+Webhook_URL =  "https://discord.com/api/webhooks/1388692500302270524/QBFS9oJ4JvPv89m8Rr0eBTV8E9RjxbUPyPKH0JzzO9pqhFs1Xzc2OpsiEbApfBvjzTBV"
  
 local request = syn and syn.request or request or http and http.request or http_request
  

@@ -2052,6 +2052,47 @@ AnythingInChestSection:CreateDropdown({
 })
 
 AnythingInChestSection:CreateButton({
+    Name = 'Unstore Item',
+    Callback = function()
+        local function GetClosestFilteredChest()
+            local CheckPassiveOrNonPassive = Workspace:FindFirstChild("Replicators"):FindFirstChild('NonPassive') and 'NonPassive' or 'Passive'
+	        local closest
+	        local range = math.huge
+            if IsPlayerAlive(LocalPlayer) then
+                for _, chest in pairs(Workspace:WaitForChild("Replicators")[CheckPassiveOrNonPassive]:GetChildren()) do
+                    if string.find(chest.Name:lower(), 'storage') and chest:FindFirstChildOfClass('MeshPart') then
+                        if getgenv().configs.ChestType == 'Any' then
+                            local dist = (LocalPlayer.Character:WaitForChild('HumanoidRootPart').Position - chest:FindFirstChildOfClass('MeshPart').Position).magnitude
+                            if dist < range then
+                                range = dist
+                                closest = chest
+                            end
+                        else
+                            if string.find(chest.Name:lower(), getgenv().configs.ChestType:lower()) then
+                                local dist = (LocalPlayer.Character:WaitForChild('HumanoidRootPart').Position - chest:FindFirstChildOfClass('MeshPart').Position).magnitude
+                                if dist < range then
+                                    range = dist
+                                    closest = chest
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+	        return closest
+        end
+        local GetFilteredChest = GetClosestFilteredChest()
+        if not GetFilteredChest then
+            MakeAtlasNotification('Needs chest', 'Place any chest down!', 2.5)
+            return
+        end
+        for i=1, getgenv().AmountOfChestInserts do
+            RemoteEvents['UpdateStorageChest']:FireServer(GetFilteredChest, false, SWITCHEDITEMSTABLE[getgenv().ItemToPutInChest])
+        end
+    end
+})
+
+AnythingInChestSection:CreateButton({
     Name = 'Store Item',
     Callback = function()
         local function GetClosestFilteredChest()
